@@ -13,7 +13,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         }
       },
       "stringData": {
@@ -23,7 +25,7 @@
         "admin-password": "${ADMIN_PASSWORD}",
         "file-services-client-username": "${FILE_SERVICES_CLIENT_USERNAME}",
         "file-services-client-password": "${FILE_SERVICES_CLIENT_PASSWORD}",
-        "file-services-client-url": "${FILE_SERVICES_CLIENT_URL}"      
+        "file-services-client-url": "${FILE_SERVICES_CLIENT_URL}"
       },
       "type": "Opaque"
     },
@@ -35,7 +37,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         }
       },
       "spec": {
@@ -63,7 +67,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         }
       },
       "spec": {
@@ -99,7 +105,9 @@
             "labels": {
               "name": "${NAME}${SUFFIX}",
               "app": "${APP_NAME}${SUFFIX}",
-              "app-group": "${APP_GROUP}"
+              "app-group": "${APP_GROUP}",
+              "role": "${ROLE}",
+              "env": "${TAG_NAME}"
             }
           },
           "spec": {
@@ -238,7 +246,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         }
       },
       "spec": {
@@ -279,6 +289,13 @@
       "description": "The name assigned to all of the deployments in this project.",
       "required": true,
       "value": "scv"
+    },
+    {
+      "name": "ROLE",
+      "displayName": "Role",
+      "description": "The role of this service within the application - used for Network Policies",
+      "required": true,
+      "value": "api"
     },
     {
       "name": "IMAGE_NAMESPACE",
@@ -380,14 +397,14 @@
       "displayName": "Minimum Replicas",
       "description": "The minimum number of pods to have running.",
       "required": true,
-      "value": "2"
+      "value": "1"
     },
     {
       "name": "MAX_REPLICAS",
       "displayName": "Maximum Replicas",
       "description": "The maximum number of pods to have running.",
       "required": true,
-      "value": "16"
+      "value": "4"
     },
     {
       "name": "CPU_REQUEST",

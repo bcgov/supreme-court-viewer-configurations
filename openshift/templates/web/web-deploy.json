@@ -17,7 +17,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         },
         "name": "${NAME}${SUFFIX}"
       },
@@ -44,6 +46,8 @@
               "name": "${NAME}${SUFFIX}",
               "app": "${APP_NAME}${SUFFIX}",
               "app-group": "${APP_GROUP}",
+              "role": "${ROLE}",
+              "env": "${TAG_NAME}",
               "deploymentconfig": "${NAME}${SUFFIX}"
             }
           },
@@ -200,7 +204,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         },
         "name": "${NAME}${SUFFIX}"
       },
@@ -229,7 +235,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         },
         "annotations": {
           "haproxy.router.openshift.io/timeout": "${ROUTE_TIMEOUT}"
@@ -259,7 +267,9 @@
         "labels": {
           "name": "${NAME}${SUFFIX}",
           "app": "${APP_NAME}${SUFFIX}",
-          "app-group": "${APP_GROUP}"
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
         }
       },
       "spec": {
@@ -269,6 +279,39 @@
         },
         "minReplicas": "${{MIN_REPLICAS}}",
         "maxReplicas": "${{MAX_REPLICAS}}"
+      }
+    },
+    {
+      "kind": "NetworkSecurityPolicy",
+      "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+      "metadata": {
+        "name": "custom-${NAME}${SUFFIX}-policy",
+        "labels": {
+          "name": "custom-${NAME}${SUFFIX}-policy",
+          "app": "${APP_NAME}${SUFFIX}",
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
+        }
+      },
+      "spec": {
+        "description": "Allow the web application to talk to the api.",
+        "source": [
+          [
+            "role=${ROLE}",
+            "app=${APP_NAME}${SUFFIX}",
+            "env=${TAG_NAME}",
+            "$namespace=${NAMESPACE_NAME}-${TAG_NAME}"
+          ]
+        ],
+        "destination": [
+          [
+            "role=api",
+            "app=${APP_NAME}${SUFFIX}",
+            "env=${TAG_NAME}",
+            "$namespace=${NAMESPACE_NAME}-${TAG_NAME}"
+          ]
+        ]
       }
     }
   ],
@@ -300,6 +343,13 @@
       "description": "The name assigned to all of the deployments in this project.",
       "required": true,
       "value": "scv"
+    },
+    {
+      "name": "ROLE",
+      "displayName": "Role",
+      "description": "The role of this service within the application - used for Network Policies",
+      "required": true,
+      "value": "web"
     },
     {
       "description": "The namespace where to get the above image name",
@@ -398,14 +448,14 @@
       "displayName": "Minimum Replicas",
       "description": "The minimum number of pods to have running.",
       "required": true,
-      "value": "2"
+      "value": "1"
     },
     {
       "name": "MAX_REPLICAS",
       "displayName": "Maximum Replicas",
       "description": "The maximum number of pods to have running.",
       "required": true,
-      "value": "6"
+      "value": "4"
     },
     {
       "name": "CPU_REQUEST",
