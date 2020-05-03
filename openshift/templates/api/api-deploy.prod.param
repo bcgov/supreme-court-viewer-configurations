@@ -1,0 +1,28 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/api/api-deploy.json
+#=========================================================
+# NAME=api
+# SUFFIX=
+# APP_NAME=Supreme-Court-Viewer
+# APP_GROUP=scv
+# IMAGE_NAMESPACE=ovjbim-tools
+TAG_NAME=prod
+# ASPNETCORE_ENVIRONMENT=Production
+# ASPNETCORE_URLS=http://+:8080
+# CORS_DOMAIN=http://localhost:8080
+# FILE_SERVICES_CLIENT_USERNAME=
+# FILE_SERVICES_CLIENT_PASSWORD=
+# FILE_SERVICES_CLIENT_URL=
+# USE_AUTHENTICATION=
+# USER_ID=[a-zA-Z_][a-zA-Z0-9_]{10}
+# USER_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# ADMIN_USER_ID=[a-zA-Z_][a-zA-Z0-9_]{10}
+# ADMIN_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# MIN_REPLICAS=2
+# MAX_REPLICAS=16
+# CPU_REQUEST=10m
+# CPU_LIMIT=300m
+# MEMORY_REQUEST=10Mi
+# MEMORY_LIMIT=256Mi
