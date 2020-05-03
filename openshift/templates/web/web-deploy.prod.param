@@ -1,0 +1,29 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: ../openshift/templates/web/web-deploy.json
+#=========================================================
+# NAME=web
+# SUFFIX=
+# APP_NAME=Supreme-Court-Viewer
+# APP_GROUP=scv
+# IMAGE_NAMESPACE=ovjbim-tools
+# REAL_IP_FROM=172.51.0.0/16
+# API_URL=http://api:8080/api
+# API_SERVICE_NAME=api
+# API_PATH=/api
+# AdditionalRealIpFromRules=
+# IpFilterRules=
+# BLACK_LIST_CONFIG_FILE_NAME=blacklist.conf
+# BLACK_LIST_CONFIG_MAP_NAME=blacklist-conf
+# BLACK_LIST_CONFIG_MOUNT_PATH=/etc/nginx/
+APPLICATION_DOMAIN=supreme-court-viewer-prod.pathfinder.gov.bc.ca
+# ROUTE_TIMEOUT=60s
+TAG_NAME=prod
+# HTTP_BASIC=
+# MIN_REPLICAS=2
+# MAX_REPLICAS=6
+# CPU_REQUEST=10m
+# CPU_LIMIT=250m
+# MEMORY_REQUEST=100Mi
+# MEMORY_LIMIT=256Mi
