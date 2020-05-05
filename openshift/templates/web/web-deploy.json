@@ -54,13 +54,25 @@
           "spec": {
             "volumes": [
               {
-                "name": "${NAME}${SUFFIX}-blacklist-config-volume",
+                "name": "${NAME}${SUFFIX}-${BLACK_LIST_CONFIG_MAP_NAME}-volume",
                 "configMap": {
                   "name": "${BLACK_LIST_CONFIG_MAP_NAME}",
                   "items": [
                     {
                       "key": "${BLACK_LIST_CONFIG_FILE_NAME}",
                       "path": "${BLACK_LIST_CONFIG_FILE_NAME}"
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "${NAME}${SUFFIX}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume",
+                "configMap": {
+                  "name": "${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}",
+                  "items": [
+                    {
+                      "key": "${NGINX_CONF_TEMPLATE_FILE_NAME}",
+                      "path": "${NGINX_CONF_TEMPLATE_FILE_NAME}"
                     }
                   ]
                 }
@@ -137,9 +149,14 @@
                 },
                 "volumeMounts": [
                   {
-                    "name": "${NAME}${SUFFIX}-blacklist-config-volume",
+                    "name": "${NAME}${SUFFIX}-${BLACK_LIST_CONFIG_MAP_NAME}-volume",
                     "mountPath": "${BLACK_LIST_CONFIG_MOUNT_PATH}${BLACK_LIST_CONFIG_FILE_NAME}",
                     "subPath": "${BLACK_LIST_CONFIG_FILE_NAME}"
+                  },
+                  {
+                    "name": "${NAME}${SUFFIX}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume",
+                    "mountPath": "${NGINX_CONF_TEMPLATE_MOUNT_PATH}${NGINX_CONF_TEMPLATE_FILE_NAME}",
+                    "subPath": "${NGINX_CONF_TEMPLATE_FILE_NAME}"
                   }
                 ],
                 "livenessProbe": {
@@ -417,6 +434,27 @@
       "description": "The path to use to mount the config file.",
       "required": true,
       "value": "/etc/nginx/"
+    },
+    {
+      "name": "NGINX_CONF_TEMPLATE_FILE_NAME",
+      "displayName": "Config File Name",
+      "description": "The name of the configuration file.",
+      "required": true,
+      "value": "nginx.conf.template"
+    },
+    {
+      "name": "NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME",
+      "displayName": "Config Map Name",
+      "description": "The name of the configuration map.",
+      "required": true,
+      "value": "nginx-conf-template"
+    },
+    {
+      "name": "NGINX_CONF_TEMPLATE_MOUNT_PATH",
+      "displayName": "Config Mount Path",
+      "description": "The path to use to mount the config file.",
+      "required": true,
+      "value": "/tmp/"
     },
     {
       "description": "The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca, if left blank a value will be defaulted.",

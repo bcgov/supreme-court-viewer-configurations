@@ -17,6 +17,9 @@
 # BLACK_LIST_CONFIG_FILE_NAME=blacklist.conf
 # BLACK_LIST_CONFIG_MAP_NAME=blacklist-conf
 # BLACK_LIST_CONFIG_MOUNT_PATH=/etc/nginx/
+# NGINX_CONF_TEMPLATE_FILE_NAME=nginx.conf.template
+# NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME=nginx-conf-template
+# NGINX_CONF_TEMPLATE_MOUNT_PATH=/tmp/
 APPLICATION_DOMAIN=supreme-court-viewer-dev.pathfinder.gov.bc.ca
 # ROUTE_TIMEOUT=60s
 TAG_NAME=dev
