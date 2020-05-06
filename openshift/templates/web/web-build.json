@@ -105,7 +105,7 @@
           ]
         ]
       }
-    }    
+    }
   ],
   "parameters": [
     {
@@ -150,7 +150,6 @@
       "required": true,
       "value": "tools"
     },
-
     {
       "name": "SOURCE_IMAGE_NAMESPACE",
       "displayName": "Source Image Namespace",
