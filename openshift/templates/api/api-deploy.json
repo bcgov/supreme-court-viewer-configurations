@@ -25,7 +25,10 @@
         "admin-password": "${ADMIN_PASSWORD}",
         "file-services-client-username": "${FILE_SERVICES_CLIENT_USERNAME}",
         "file-services-client-password": "${FILE_SERVICES_CLIENT_PASSWORD}",
-        "file-services-client-url": "${FILE_SERVICES_CLIENT_URL}"
+        "file-services-client-url": "${FILE_SERVICES_CLIENT_URL}",
+        "request-application-code": "${REQUEST_APPLICATION_CODE}",
+        "request-agency-identifier-id": "${REQUEST_AGENCY_IDENTIFIER_ID}",
+        "request-part-id": "${REQUEST_PART_ID}"
       },
       "type": "Opaque"
     },
@@ -178,6 +181,33 @@
                       "secretKeyRef": {
                         "name": "${NAME}${SUFFIX}",
                         "key": "file-services-client-url"
+                      }
+                    }
+                  },
+                  {
+                    "name": "Request__ApplicationCd",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}${SUFFIX}",
+                        "key": "request-application-code"
+                      }
+                    }
+                  },
+                  {
+                    "name": "Request__AgencyIdentifierId",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}${SUFFIX}",
+                        "key": "request-agency-identifier-id"
+                      }
+                    }
+                  },
+                  {
+                    "name": "Request__PartId",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}${SUFFIX}",
+                        "key": "request-part-id"
                       }
                     }
                   },
@@ -351,6 +381,27 @@
       "displayName": "File Services Client Url",
       "description": "File Services Client Url",
       "required": false,
+      "value": ""
+    },
+    {
+      "name": "REQUEST_APPLICATION_CODE",
+      "displayName": "Request Application Code",
+      "description": "Request Application Code",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "REQUEST_AGENCY_IDENTIFIER_ID",
+      "displayName": "Request Agency Identifier Id",
+      "description": "Request Agency Identifier Id",
+      "required": true,
+      "value": ""
+    },
+    {
+      "name": "REQUEST_PART_ID",
+      "displayName": "Request Part Id",
+      "description": "Request Part Id",
+      "required": true,
       "value": ""
     },
     {
