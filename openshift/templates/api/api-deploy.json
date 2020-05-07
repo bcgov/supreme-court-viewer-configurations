@@ -185,6 +185,33 @@
                     }
                   },
                   {
+                    "name": "LookupServicesClient__Username",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}${SUFFIX}",
+                        "key": "file-services-client-username"
+                      }
+                    }
+                  },
+                  {
+                    "name": "LookupServicesClient__Password",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}${SUFFIX}",
+                        "key": "file-services-client-password"
+                      }
+                    }
+                  },
+                  {
+                    "name": "LookupServicesClient__Url",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${NAME}${SUFFIX}",
+                        "key": "file-services-client-url"
+                      }
+                    }
+                  },
+                  {
                     "name": "Request__ApplicationCd",
                     "valueFrom": {
                       "secretKeyRef": {
