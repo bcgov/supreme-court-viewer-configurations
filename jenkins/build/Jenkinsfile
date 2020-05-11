@@ -1,7 +1,7 @@
 def PIPELINE_NAME = "build"
 
 def LIB_NAME= "scv-lib"
-def LIB_REPO = "https://github.com/WadeBarnes/supreme-court-viewer-configurations.git"
+def LIB_REPO = "https://github.com/bcgov/supreme-court-viewer-configurations.git"
 def LIB_BRANCH = "master"
 library identifier: "${LIB_NAME}@${LIB_BRANCH}", 
         retriever: modernSCM(
