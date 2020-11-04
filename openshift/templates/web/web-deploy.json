@@ -277,6 +277,39 @@
       }
     },
     {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}${SUFFIX}-siteminder-route",
+        "labels": {
+          "name": "${NAME}${SUFFIX}-siteminder-route",
+          "app": "${APP_NAME}${SUFFIX}",
+          "app-group": "${APP_GROUP}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
+        },
+        "annotations": {
+          "haproxy.router.openshift.io/ip_whitelist": "${SITEMINDER_WHITE_LIST}",
+          "haproxy.router.openshift.io/timeout": "${ROUTE_TIMEOUT}"
+        }
+      },
+      "spec": {
+        "host": "${SITEMINDER_APPLICATION_DOMAIN}",
+        "port": {
+          "targetPort": "8080-tcp"
+        },
+        "tls": {
+          "insecureEdgeTerminationPolicy": "Redirect",
+          "termination": "edge"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}${SUFFIX}",
+          "weight": 100
+        }
+      }
+    },
+    {
       "kind": "HorizontalPodAutoscaler",
       "apiVersion": "autoscaling/v1",
       "metadata": {
@@ -495,6 +528,18 @@
       "displayName": "Application Hostname",
       "name": "APPLICATION_DOMAIN",
       "value": "supreme-court-viewer-dev.pathfinder.gov.bc.ca"
+    },
+    {
+      "name": "SITEMINDER_APPLICATION_DOMAIN",
+      "displayName": "SiteMinder Application Domain",
+      "description": "The endpoint used for SiteMinder routed access to the application.",
+      "value": "supreme-court-viewer-dev.pathfinder.bcgov"
+    },
+    {
+      "name": "SITEMINDER_WHITE_LIST",
+      "displayName": "SiteMinder Whitelist",
+      "description": "The whitelist containing all of the trusted siteminder IPs.",
+      "required": false
     },
     {
       "name": "ROUTE_TIMEOUT",
