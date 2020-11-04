@@ -27,5 +27,8 @@ OUTPUT_FILE=${CONFIG_MAP_NAME}-configmap_DeploymentConfig.json
 printStatusMsg "Generating ConfigMap; ${CONFIG_MAP_NAME} ..."
 generateConfigMap "${CONFIG_MAP_NAME}" "${SOURCE_FILE}" "${OUTPUT_FORMAT}" "${OUTPUT_FILE}"
 
-unset SPECIALDEPLOYPARMS
+# Get the allow list for the environment.
+readParameter "SITEMINDER_WHITE_LIST - Please enter the white list of trusted IP addresses that should be allowed to access the SiteMinder route (as a space delimited list of IP addresses):" "SITEMINDER_WHITE_LIST" "" "false"
+
+SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
 echo ${SPECIALDEPLOYPARMS}
