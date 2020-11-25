@@ -304,6 +304,10 @@
                         "key": "admin-password"
                       }
                     }
+                  },
+                  {
+                    "name": "WebBaseHref",
+                    "value": "${WEB_BASE_HREF}"
                   }
                 ],
                 "resources": {
@@ -496,6 +500,12 @@
       "required": true,
       "generate": "expression",
       "from": "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}"
+    },
+    {
+      "name": "WEB_BASE_HREF",
+      "displayName": "Web Base Href",
+      "description": "The application host path (Web Base Href).",
+      "value": "/scjscv/"
     },
     {
       "name": "MIN_REPLICAS",

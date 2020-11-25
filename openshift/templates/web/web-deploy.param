@@ -14,6 +14,7 @@ REAL_IP_FROM=172.51.0.0/16
 API_URL=http://api:8080/api
 API_SERVICE_NAME=api
 API_PATH=/api
+WEB_BASE_HREF=/scjscv/
 AdditionalRealIpFromRules=
 IpFilterRules=
 BLACK_LIST_CONFIG_FILE_NAME=blacklist.conf

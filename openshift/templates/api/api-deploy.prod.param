@@ -23,6 +23,7 @@ TAG_NAME=prod
 # USER_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
 # ADMIN_USER_ID=[a-zA-Z_][a-zA-Z0-9_]{10}
 # ADMIN_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# WEB_BASE_HREF=/scjscv/
 # MIN_REPLICAS=2
 # MAX_REPLICAS=16
 # CPU_REQUEST=10m
