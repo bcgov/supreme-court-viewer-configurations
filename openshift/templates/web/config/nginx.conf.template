@@ -81,9 +81,10 @@ http {
     # ======================================================
 
     server {
-        listen       8080;
-        server_name  localhost;
-
+        %LISTEN_CONFIG_SECTION%
+        
+        # Allow large headers.
+        large_client_header_buffers 4 32k;
         # add in most common security headers
         add_header Content-Security-Policy "default-src * data: blob: filesystem: 'unsafe-inline' 'unsafe-eval'";
         add_header Strict-Transport-Security "max-age=86400; includeSubDomains";

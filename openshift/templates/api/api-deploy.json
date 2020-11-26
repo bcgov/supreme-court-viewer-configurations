@@ -28,7 +28,9 @@
         "file-services-client-url": "${FILE_SERVICES_CLIENT_URL}",
         "request-application-code": "${REQUEST_APPLICATION_CODE}",
         "request-agency-identifier-id": "${REQUEST_AGENCY_IDENTIFIER_ID}",
-        "request-part-id": "${REQUEST_PART_ID}"
+        "request-part-id": "${REQUEST_PART_ID}",
+        "scss-service-account-guid": "${SCSS_SERVICE_ACCOUNT_GUID}",
+        "siteminder-user-type": "${ALLOW_SITE_MINDER_USER_TYPE}"
       },
       "type": "Opaque"
     },
@@ -266,11 +268,7 @@
                     }
                   },
                   {
-                    "name": "USE_AUTHENTICATION",
-                    "value": "${USE_AUTHENTICATION}"
-                  },
-                  {
-                    "name": "USER_ID",
+                    "name": "Auth__UserId",
                     "valueFrom": {
                       "secretKeyRef": {
                         "name": "${NAME}${SUFFIX}",
@@ -279,7 +277,7 @@
                     }
                   },
                   {
-                    "name": "USER_PASSWORD",
+                    "name": "Auth__UserPassword",
                     "valueFrom": {
                       "secretKeyRef": {
                         "name": "${NAME}${SUFFIX}",
@@ -288,20 +286,20 @@
                     }
                   },
                   {
-                    "name": "ADMIN_USER_ID",
+                    "name": "Auth__SCSSServiceAccountGuid",
                     "valueFrom": {
                       "secretKeyRef": {
                         "name": "${NAME}${SUFFIX}",
-                        "key": "admin-user"
+                        "key": "scss-service-account-guid"
                       }
                     }
                   },
                   {
-                    "name": "ADMIN_PASSWORD",
+                    "name": "Auth__SiteMinderUserType",
                     "valueFrom": {
                       "secretKeyRef": {
                         "name": "${NAME}${SUFFIX}",
-                        "key": "admin-password"
+                        "key": "siteminder-user-type"
                       }
                     }
                   },
@@ -500,6 +498,20 @@
       "required": true,
       "generate": "expression",
       "from": "[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}"
+    },
+    {
+      "name": "ALLOW_SITE_MINDER_USER_TYPE",
+      "displayName": "Allowed SiteMinder User Type",
+      "description": "Allowed SiteMinder User Type.",
+      "required": false,
+      "value": ""
+    },
+    {
+      "name": "SCSS_SERVICE_ACCOUNT_GUID",
+      "displayName": "SCSS Service Account GUID",
+      "description": "SCSS Service Account GUID",
+      "required": false,
+      "value": ""
     },
     {
       "name": "WEB_BASE_HREF",
