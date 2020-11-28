@@ -55,6 +55,9 @@ http {
     # HTTP Basic rules
     auth_basic_user_file /tmp/.htpasswd;
 
+    # Allows headers with underscores to be passed through. EX. SMGOV_USERGUID 
+    ignore_invalid_headers off;
+
     # ======================================================
     # Set variables for API proxy
     # ------------------------------------------------------
