@@ -295,7 +295,7 @@
                     }
                   },
                   {
-                    "name": "Auth__SiteMinderUserType",
+                    "name": "Auth__AllowSiteMinderUserType",
                     "valueFrom": {
                       "secretKeyRef": {
                         "name": "${NAME}${SUFFIX}",
