@@ -1,7 +1,7 @@
 #=========================================================
 # OpenShift template parameters for:
 # Component: .
-# Template File: ../openshift/templates/api/api-build.json
+# Template File: ../openshift/templates/api/api-build.yaml
 #=========================================================
 NAME=api
 SUFFIX=

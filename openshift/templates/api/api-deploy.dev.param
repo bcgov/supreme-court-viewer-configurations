@@ -1,12 +1,14 @@
 #=========================================================
 # OpenShift template parameters for:
 # Component: .
-# Template File: ../openshift/templates/api/api-deploy.json
+# Template File: ../openshift/templates/api/api-deploy.yaml
 #=========================================================
 # NAME=api
 # SUFFIX=
 # APP_NAME=Supreme-Court-Viewer
 # APP_GROUP=scv
+# NAMESPACE_NAME=ovjbim
+# ROLE=api
 # IMAGE_NAMESPACE=ovjbim-tools
 TAG_NAME=dev
 # ASPNETCORE_ENVIRONMENT=Production
@@ -23,9 +25,17 @@ TAG_NAME=dev
 # USER_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
 # ADMIN_USER_ID=[a-zA-Z_][a-zA-Z0-9_]{10}
 # ADMIN_PASSWORD=[a-zA-Z0-9_~!@#$%^&*()-=<>,.?;:|]{16}
+# ALLOW_SITE_MINDER_USER_TYPE=
 # WEB_BASE_HREF=/scjscv/
-# MIN_REPLICAS=2
-# MAX_REPLICAS=16
+# DB_NAME=db
+# DATA_PROTECTION_ENCRYPTION_KEY=
+# KEYCLOAK_CLIENT=scv
+# KEYCLOAK_AUDIENCE=scv
+# KEYCLOAK_AUTHORITY=
+# KEYCLOAK_SECRET=
+# SITEMINDER_LOGOUT_URL=
+# MIN_REPLICAS=1
+# MAX_REPLICAS=4
 # CPU_REQUEST=10m
 # CPU_LIMIT=300m
 # MEMORY_REQUEST=10Mi
