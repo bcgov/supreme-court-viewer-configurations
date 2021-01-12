@@ -12,6 +12,10 @@ fi
 # ================================================================================================================
 
 if createOperation; then
+  # Generate a random encryption key
+  printStatusMsg "Creating a set of random keys ..."
+  writeParameter "DATA_PROTECTION_ENCRYPTION_KEY" $(generateKey 32 | fold -w 32 | head -n 1) "false"
+
   # Randomly generate a set of credentials without asking ...
   printStatusMsg "Creating a set of random user credentials ..."
   writeParameter "USER_ID" $(generateUsername) "false"
@@ -27,11 +31,18 @@ if createOperation; then
   readParameter "REQUEST_AGENCY_IDENTIFIER_ID - Please provide the Request Agency Identifier Id for use with the File Services API.  The default is a randomly gererated value." REQUEST_AGENCY_IDENTIFIER_ID $(generatePassword) "false"
   readParameter "REQUEST_PART_ID - Please provide the Request Part Id for use with the File Services API.  The default is a randomly gererated value." REQUEST_PART_ID $(generatePassword) "false"
   readParameter "ALLOW_SITE_MINDER_USER_TYPE - Please provide the Allowed SiteMinder User Type for the application.  The default is a blank string." ALLOW_SITE_MINDER_USER_TYPE "" "false"
-  readParameter "SCSS_SERVICE_ACCOUNT_GUID - Please provide the SCSS Service Account GUID for the application.  The default is a blank string." SCSS_SERVICE_ACCOUNT_GUID "" "false"
+
+  # Get KeyCloak settings
+  readParameter "KEYCLOAK_AUTHORITY - Please provide the endpoint (URL) for the OIDC relaying party." KEYCLOAK_AUTHORITY "" "false" 
+  readParameter "KEYCLOAK_SECRET - Please provide the API secret toi use with the OIDC relaying party." KEYCLOAK_SECRET "" "false" 
+  readParameter "SITEMINDER_LOGOUT_URL - Please provide the SiteMinder Logout URL." SITEMINDER_LOGOUT_URL "" "false" 
 else
+  printStatusMsg "Update operation detected ...\nSkipping the generation of keys ...\n"
+  writeParameter "DATA_PROTECTION_ENCRYPTION_KEY" "generation_skipped" "false"
+
   # Secrets are removed from the configurations during update operations ...
   writeParameter "REQUEST_PART_ID" "prompt_skipped" "false"
-  printStatusMsg "Update operation detected ...\nSkipping the generation of random user credentials.\nSkipping the prompts for FILE_SERVICES_CLIENT_URL, FILE_SERVICES_CLIENT_USERNAME, FILE_SERVICES_CLIENT_PASSWORD, REQUEST_APPLICATION_CODE, REQUEST_AGENCY_IDENTIFIER_ID, ALLOW_SITE_MINDER_USER_TYPE, SCSS_SERVICE_ACCOUNT_GUID, and secrets ...\n"
+  printStatusMsg "Update operation detected ...\nSkipping the generation of random user credentials.\nSkipping the prompts for FILE_SERVICES_CLIENT_URL, FILE_SERVICES_CLIENT_USERNAME, FILE_SERVICES_CLIENT_PASSWORD, REQUEST_APPLICATION_CODE, REQUEST_AGENCY_IDENTIFIER_ID, ALLOW_SITE_MINDER_USER_TYPE, KEYCLOAK_AUTHORITY, KEYCLOAK_SECRET, and SITEMINDER_LOGOUT_URL secrets ...\n"
   writeParameter "USER_ID" "generation_skipped" "false"
   writeParameter "USER_PASSWORD" "generation_skipped" "false"
   writeParameter "ADMIN_USER_ID" "generation_skipped" "false"
@@ -44,7 +55,10 @@ else
   writeParameter "REQUEST_AGENCY_IDENTIFIER_ID" "prompt_skipped" "false"
   writeParameter "REQUEST_PART_ID" "prompt_skipped" "false"
   writeParameter "ALLOW_SITE_MINDER_USER_TYPE" "prompt_skipped" "false"
-  writeParameter "SCSS_SERVICE_ACCOUNT_GUID" "prompt_skipped" "false"
+
+  writeParameter "KEYCLOAK_AUTHORITY" "prompt_skipped" "false"
+  writeParameter "KEYCLOAK_SECRET" "prompt_skipped" "false"
+  writeParameter "SITEMINDER_LOGOUT_URL" "prompt_skipped" "false"
 fi
 
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
