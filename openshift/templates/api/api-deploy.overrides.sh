@@ -35,6 +35,8 @@ if createOperation; then
   # Get KeyCloak settings
   readParameter "KEYCLOAK_AUTHORITY - Please provide the endpoint (URL) for the OIDC relaying party." KEYCLOAK_AUTHORITY "" "false" 
   readParameter "KEYCLOAK_SECRET - Please provide the API secret toi use with the OIDC relaying party." KEYCLOAK_SECRET "" "false" 
+  readParameter "KEYCLOAK_PRES_REQ_CONF_ID - Please provide the KeyCloak Presentation request Configuration Id." KEYCLOAK_PRES_REQ_CONF_ID "" "false"
+  readParameter "KEYCLOAK_IDP_HINT - Please provide the KeyCloak hint for login." KEYCLOAK_IDP_HINT "" "false"
   readParameter "SITEMINDER_LOGOUT_URL - Please provide the SiteMinder Logout URL." SITEMINDER_LOGOUT_URL "" "false" 
 else
   printStatusMsg "Update operation detected ...\nSkipping the generation of keys ...\n"
@@ -42,7 +44,7 @@ else
 
   # Secrets are removed from the configurations during update operations ...
   writeParameter "REQUEST_PART_ID" "prompt_skipped" "false"
-  printStatusMsg "Update operation detected ...\nSkipping the generation of random user credentials.\nSkipping the prompts for FILE_SERVICES_CLIENT_URL, FILE_SERVICES_CLIENT_USERNAME, FILE_SERVICES_CLIENT_PASSWORD, REQUEST_APPLICATION_CODE, REQUEST_AGENCY_IDENTIFIER_ID, ALLOW_SITE_MINDER_USER_TYPE, KEYCLOAK_AUTHORITY, KEYCLOAK_SECRET, and SITEMINDER_LOGOUT_URL secrets ...\n"
+  printStatusMsg "Update operation detected ...\nSkipping the generation of random user credentials.\nSkipping the prompts for FILE_SERVICES_CLIENT_URL, FILE_SERVICES_CLIENT_USERNAME, FILE_SERVICES_CLIENT_PASSWORD, REQUEST_APPLICATION_CODE, REQUEST_AGENCY_IDENTIFIER_ID, ALLOW_SITE_MINDER_USER_TYPE, KEYCLOAK_AUTHORITY, KEYCLOAK_SECRET, KEYCLOAK_PRES_REQ_CONF_ID, KEYCLOAK_IDP_HINT, and SITEMINDER_LOGOUT_URL secrets ...\n"
   writeParameter "USER_ID" "generation_skipped" "false"
   writeParameter "USER_PASSWORD" "generation_skipped" "false"
   writeParameter "ADMIN_USER_ID" "generation_skipped" "false"
@@ -58,6 +60,8 @@ else
 
   writeParameter "KEYCLOAK_AUTHORITY" "prompt_skipped" "false"
   writeParameter "KEYCLOAK_SECRET" "prompt_skipped" "false"
+  writeParameter "KEYCLOAK_PRES_REQ_CONF_ID" "prompt_skipped" "false"
+  writeParameter "KEYCLOAK_IDP_HINT" "prompt_skipped" "false"
   writeParameter "SITEMINDER_LOGOUT_URL" "prompt_skipped" "false"
 fi
 
