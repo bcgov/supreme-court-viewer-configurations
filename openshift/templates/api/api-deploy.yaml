@@ -54,6 +54,8 @@ objects:
       keycloak-authority: ${KEYCLOAK_AUTHORITY}
       keycloak-secret: ${KEYCLOAK_SECRET}
       keycloak-audience: ${KEYCLOAK_AUDIENCE}
+      keycloak-pres-req-conf-id: ${KEYCLOAK_PRES_REQ_CONF_ID}
+      keycloak-idp-hint: ${KEYCLOAK_IDP_HINT}
       siteminder-logout-url: ${SITEMINDER_LOGOUT_URL}
     type: Opaque
   - kind: Service
@@ -247,6 +249,16 @@ objects:
                     secretKeyRef:
                       name: ${NAME}${SUFFIX}
                       key: keycloak-audience
+                - name: Keycloak__PresReqConfId
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: keycloak-pres-req-conf-id
+                - name: Keycloak__VcIdpHint
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: keycloak-idp-hint
                 - name: SiteMinderLogoutUrl
                   valueFrom:
                     secretKeyRef:
@@ -461,6 +473,16 @@ parameters:
     description: KeyCloak API Secret
     required: false
     value: ""
+  - name: KEYCLOAK_PRES_REQ_CONF_ID
+    displayName: KeyCloak Presentation request Configuration Id
+    description: KeyCloak Presentation request Configuration Id
+    required: false
+    value:
+  - name: KEYCLOAK_IDP_HINT
+    displayName: KeyCloak IDP Hint
+    description: KeyCloak IDP Hint
+    required: false
+    value:
   - name: SITEMINDER_LOGOUT_URL
     displayName: SiteMinder Logout URL
     description: SiteMinder Logout URL
