@@ -7,13 +7,13 @@ metadata:
     tags: nginx
   name: ${NAME}
 objects:
-  - apiVersion: v1
-    kind: DeploymentConfig
+  - kind: DeploymentConfig
+    apiVersion: v1
     metadata:
       creationTimestamp:
       labels:
         name: ${NAME}${SUFFIX}
-        app: ${APP_NAME}${SUFFIX}
+        app: ${APP_NAME}
         app-group: ${APP_GROUP}
         role: ${ROLE}
         env: ${TAG_NAME}
@@ -36,7 +36,7 @@ objects:
           creationTimestamp:
           labels:
             name: ${NAME}${SUFFIX}
-            app: ${APP_NAME}${SUFFIX}
+            app: ${APP_NAME}
             app-group: ${APP_GROUP}
             role: ${ROLE}
             env: ${TAG_NAME}
@@ -45,13 +45,13 @@ objects:
           volumes:
             - name: ${NAME}${SUFFIX}-${BLACK_LIST_CONFIG_MAP_NAME}-volume
               configMap:
-                name: ${BLACK_LIST_CONFIG_MAP_NAME}
+                name: ${BLACK_LIST_CONFIG_MAP_NAME}${SUFFIX}
                 items:
                   - key: ${BLACK_LIST_CONFIG_FILE_NAME}
                     path: ${BLACK_LIST_CONFIG_FILE_NAME}
             - name: ${NAME}${SUFFIX}-${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}-volume
               configMap:
-                name: ${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}
+                name: ${NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME}${SUFFIX}
                 items:
                   - key: ${NGINX_CONF_TEMPLATE_FILE_NAME}
                     path: ${NGINX_CONF_TEMPLATE_FILE_NAME}
@@ -89,6 +89,8 @@ objects:
                     secretKeyRef:
                       name: ${API_SERVICE_NAME}
                       key: api-password
+                - name: IncludeSiteminderHeaders
+                  value: ${INCLUDE_SITEMINDER_HEADERS}
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -139,13 +141,14 @@ objects:
               kind: ImageStreamTag
               namespace: ${IMAGE_NAMESPACE}
               name: ${NAME}:${TAG_NAME}
-  - apiVersion: v1
-    kind: Service
+
+  - kind: Service
+    apiVersion: v1
     metadata:
       creationTimestamp:
       labels:
         name: ${NAME}${SUFFIX}
-        app: ${APP_NAME}${SUFFIX}
+        app: ${APP_NAME}
         app-group: ${APP_GROUP}
         role: ${ROLE}
         env: ${TAG_NAME}
@@ -161,17 +164,19 @@ objects:
         deploymentconfig: ${NAME}${SUFFIX}
       sessionAffinity: None
       type: ClusterIP
-  - apiVersion: v1
-    kind: Route
+
+  - kind: Route
+    apiVersion: v1
     metadata:
       name: ${NAME}${SUFFIX}
       labels:
         name: ${NAME}${SUFFIX}
-        app: ${APP_NAME}${SUFFIX}
+        app: ${APP_NAME}
         app-group: ${APP_GROUP}
         role: ${ROLE}
         env: ${TAG_NAME}
       annotations:
+        haproxy.router.openshift.io/ip_whitelist: ${ALLOW_LIST}
         haproxy.router.openshift.io/timeout: ${ROUTE_TIMEOUT}
     spec:
       host: ${APPLICATION_DOMAIN}
@@ -184,37 +189,14 @@ objects:
         kind: Service
         name: ${NAME}${SUFFIX}
         weight: 100
-  - kind: Route
-    apiVersion: v1
-    metadata:
-      name: ${NAME}${SUFFIX}-siteminder-route
-      labels:
-        name: ${NAME}${SUFFIX}-siteminder-route
-        app: ${APP_NAME}${SUFFIX}
-        app-group: ${APP_GROUP}
-        role: ${ROLE}
-        env: ${TAG_NAME}
-      annotations:
-        haproxy.router.openshift.io/ip_whitelist: ${SITEMINDER_WHITE_LIST}
-        haproxy.router.openshift.io/timeout: ${ROUTE_TIMEOUT}
-    spec:
-      host: ${SITEMINDER_APPLICATION_DOMAIN}
-      port:
-        targetPort: 8080-tcp
-      tls:
-        insecureEdgeTerminationPolicy: Redirect
-        termination: edge
-      to:
-        kind: Service
-        name: ${NAME}${SUFFIX}
-        weight: 100
+
   - kind: HorizontalPodAutoscaler
     apiVersion: autoscaling/v1
     metadata:
       name: ${NAME}${SUFFIX}
       labels:
         name: ${NAME}${SUFFIX}
-        app: ${APP_NAME}${SUFFIX}
+        app: ${APP_NAME}
         app-group: ${APP_GROUP}
         role: ${ROLE}
         env: ${TAG_NAME}
@@ -224,13 +206,14 @@ objects:
         name: ${NAME}${SUFFIX}
       minReplicas: ${{MIN_REPLICAS}}
       maxReplicas: ${{MAX_REPLICAS}}
+
   - kind: NetworkSecurityPolicy
     apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
     metadata:
       name: custom-${NAME}${SUFFIX}-policy
       labels:
         name: custom-${NAME}${SUFFIX}-policy
-        app: ${APP_NAME}${SUFFIX}
+        app: ${APP_NAME}
         app-group: ${APP_GROUP}
         role: ${ROLE}
         env: ${TAG_NAME}
@@ -246,6 +229,7 @@ objects:
           - app=${APP_NAME}${SUFFIX}
           - env=${TAG_NAME}
           - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
+
   - kind: NetworkSecurityPolicy
     apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
     metadata:
@@ -264,6 +248,21 @@ objects:
         - - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
       destination:
         - - int:network=internal-cluster-api-endpoint
+
+  - kind: Secret
+    apiVersion: v1
+    metadata:
+      name: ${NAME}${SUFFIX}
+      labels:
+        name: ${NAME}${SUFFIX}
+        app: ${APP_NAME}
+        app-group: ${APP_GROUP}
+        role: ${ROLE}
+        env: ${TAG_NAME}
+    stringData:
+      allow-list: ${ALLOW_LIST}
+    type: Opaque
+
 parameters:
   - description:
       The name assigned to all of the openshift objects defined in this template.
@@ -276,7 +275,7 @@ parameters:
     displayName: Suffix
     description: A name suffix used for all objects
     required: false
-    value: 
+    value:
   - name: APP_NAME
     displayName: App Name
     description: Used to group components together in the OpenShift console.
@@ -343,7 +342,7 @@ parameters:
   - description: Nginx ngx_http_access_module ip filter rules
     displayName: Ip Filter Rules
     name: IpFilterRules
-    value: 
+    value:
   - name: BLACK_LIST_CONFIG_FILE_NAME
     displayName: Config File Name
     description: The name of the configuration file.
@@ -374,19 +373,17 @@ parameters:
     description: The path to use to mount the config file.
     required: true
     value: /tmp/
+
   - description:
       The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca,
       if left blank a value will be defaulted.
     displayName: Application Hostname
     name: APPLICATION_DOMAIN
     value: supreme-court-viewer-dev.pathfinder.gov.bc.ca
-  - name: SITEMINDER_APPLICATION_DOMAIN
-    displayName: SiteMinder Application Domain
-    description: The endpoint used for SiteMinder routed access to the application.
-    value: supreme-court-viewer-dev.pathfinder.bcgov
-  - name: SITEMINDER_WHITE_LIST
-    displayName: SiteMinder Whitelist
-    description: The whitelist containing all of the trusted siteminder IPs.
+
+  - name: ALLOW_LIST
+    displayName: Allow List
+    description: The list containing all of the trusted IPs for the site.
     required: false
   - name: ROUTE_TIMEOUT
     displayName: Route Timeout
@@ -395,6 +392,13 @@ parameters:
       the application's route will respond with a 504 Gateway Timeout error.
     required: true
     value: 60s
+
+  - name: INCLUDE_SITEMINDER_HEADERS
+    displayName: Include Siteminder Headers
+    description: Flag to indicate whether Siteminder headers should be allowed to pass through.
+    required: true
+    value: "false"
+
   - description: The TAG name for this environment, e.g., dev, test, prod
     displayName: Env TAG name
     name: TAG_NAME
@@ -405,7 +409,7 @@ parameters:
       'restricted';`
     displayName: HTTP Basic Nginx Config Line
     name: HTTP_BASIC
-    value: 
+    value:
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.

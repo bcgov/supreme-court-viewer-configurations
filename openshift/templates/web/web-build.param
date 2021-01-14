@@ -1,7 +1,7 @@
 #=========================================================
 # OpenShift template parameters for:
 # Component: .
-# Template File: ../openshift/templates/web/web-build.json
+# Template File: ../openshift/templates/web/web-build.yaml
 #=========================================================
 NAME=web
 SUFFIX=
