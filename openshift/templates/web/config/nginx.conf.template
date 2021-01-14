@@ -56,7 +56,7 @@ http {
     auth_basic_user_file /tmp/.htpasswd;
 
     # Allows headers with underscores to be passed through. EX. SMGOV_USERGUID 
-    ignore_invalid_headers off;
+    %IgnoreInvalidHeaders%
 
     # ======================================================
     # Set variables for API proxy
