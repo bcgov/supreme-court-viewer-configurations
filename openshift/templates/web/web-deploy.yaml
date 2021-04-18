@@ -290,7 +290,7 @@ parameters:
     displayName: Namespace Name
     description: The base namespace name for the project.
     required: true
-    value: ovjbim
+    value: 90a666
   - name: ROLE
     displayName: Role
     description:
@@ -302,7 +302,7 @@ parameters:
     displayName: Image Namespace
     name: IMAGE_NAMESPACE
     required: true
-    value: ovjbim-tools
+    value: 90a666-tools
   - description:
       OpenShift cluster private IP range in CIDR notation, used by Nginx
       ngx_http_realip_module.

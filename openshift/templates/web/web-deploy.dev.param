@@ -7,9 +7,9 @@
 # SUFFIX=
 # APP_NAME=Supreme-Court-Viewer
 # APP_GROUP=scv
-# NAMESPACE_NAME=ovjbim
+# NAMESPACE_NAME=90a666
 # ROLE=web
-# IMAGE_NAMESPACE=ovjbim-tools
+# IMAGE_NAMESPACE=90a666-tools
 # REAL_IP_FROM=172.51.0.0/16
 # API_URL=http://api:8080/api
 # API_SERVICE_NAME=api

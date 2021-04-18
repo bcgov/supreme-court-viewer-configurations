@@ -8,7 +8,7 @@
 # APP_NAME=Supreme-Court-Viewer
 # APP_GROUP=scv
 # ROLE=db
-# IMAGE_NAMESPACE=ovjbim-tools
+# IMAGE_NAMESPACE=90a666-tools
 # SOURCE_IMAGE_NAME=db
 TAG_NAME=prod
 # POSTGRESQL_DATABASE_NAME=scv-database

@@ -94,7 +94,7 @@ parameters:
     displayName: Namespace Name
     description: The base namespace name for the project.
     required: true
-    value: ovjbim
+    value: 90a666
   - name: ENV_NAME
     displayName: Environment Name
     description:
@@ -121,7 +121,7 @@ parameters:
     displayName: Runtime Image Namespace
     description: The namespace containing the runtime image.
     required: false
-    value: ovjbim-tools
+    value: 90a666-tools
   - name: RUNTIME_IMAGE_NAME
     displayName: Runtime Image Name
     description: The name of the runtime image.
