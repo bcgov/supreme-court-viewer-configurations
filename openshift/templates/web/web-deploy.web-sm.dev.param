@@ -23,7 +23,7 @@
 # NGINX_CONF_TEMPLATE_FILE_NAME=nginx.conf.template
 # NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME=nginx-conf-template
 # NGINX_CONF_TEMPLATE_MOUNT_PATH=/tmp/
-APPLICATION_DOMAIN=supreme-court-viewer-dev.pathfinder.bcgov
+APPLICATION_DOMAIN=supreme-court-viewer-dev.silver.devops.bcgov
 # ALLOW_LIST=
 # ROUTE_TIMEOUT=60s
 # INCLUDE_SITEMINDER_HEADERS=true
