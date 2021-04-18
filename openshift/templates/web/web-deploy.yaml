@@ -357,11 +357,11 @@ parameters:
     value: /tmp/
 
   - description:
-      The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca,
+      The exposed hostname that will route to the service, e.g., myappname.apps.silver.devops.gov.bc.ca,
       if left blank a value will be defaulted.
     displayName: Application Hostname
     name: APPLICATION_DOMAIN
-    value: supreme-court-viewer-dev.pathfinder.gov.bc.ca
+    value: supreme-court-viewer-dev.apps.silver.devops.gov.bc.ca
 
   - name: ALLOW_LIST
     displayName: Allow List
