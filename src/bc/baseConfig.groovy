@@ -15,5 +15,5 @@ class baseConfig {
   public static final String  SUFFIX = ''
 
   // Apps - Listed in the order they should be deployed
-  public static final String[] APPS = [ 'db', 'api', 'web' ]
+  public static final String[] APPS = [ 'backup', 'db', 'api', 'web' ]
 }
