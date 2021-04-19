@@ -29,6 +29,15 @@ objects:
                 matchLabels:
                   name: ${NAMESPACE_NAME}
                   environment: ${TAG_NAME}
+            - podSelector:
+                matchLabels:
+                  role: backup
+                  app: ${BACKUP_APP_NAME}
+                  env: ${TAG_NAME}
+              namespaceSelector:
+                matchLabels:
+                  name: ${NAMESPACE_NAME}
+                  environment: ${TAG_NAME}
           ports:
             - protocol: TCP
               port: 5432
@@ -248,6 +257,11 @@ parameters:
     description: The base namespace name for the project.
     required: true
     value: 90a666
+  - name: BACKUP_APP_NAME
+    displayName: Backup app name
+    description: The name of the Backup app.
+    required: true
+    value: Backup
 
   - name: IMAGE_NAMESPACE
     displayName: Image Namespace
