@@ -6,7 +6,7 @@
 # NAME=backup
 # SUFFIX=
 # APP_NAME=Backup
-# APP_GROUP=Sheriff-Scheduling
+# APP_GROUP=scv
 # ROLE=backup
 # NAMESPACE_NAME=90a666
 # SOURCE_IMAGE_NAME=backup
@@ -18,7 +18,7 @@ TAG_NAME=dev
 # BACKUP_STRATEGY=rolling
 # WEBHOOK_URL=
 # WEBHOOK_URL_HOST=
-ENVIRONMENT_FRIENDLY_NAME=Sheriff Scheduling (dev)
+ENVIRONMENT_FRIENDLY_NAME=Court Viewer (dev)
 ENVIRONMENT_NAME=90a666-dev
 # BACKUP_DIR=/backups/
 # DAILY_BACKUPS=
