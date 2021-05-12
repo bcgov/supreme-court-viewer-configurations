@@ -2,7 +2,7 @@ def PIPELINE_NAME = "deployment/test"
 
 def LIB_NAME= "scv-lib"
 def LIB_REPO = "https://github.com/bcgov/supreme-court-viewer-configurations.git"
-def LIB_BRANCH = "feature/ocp4"
+def LIB_BRANCH = "master"
 library identifier: "${LIB_NAME}@${LIB_BRANCH}", 
         retriever: modernSCM(
           [$class: 'GitSCMSource',
