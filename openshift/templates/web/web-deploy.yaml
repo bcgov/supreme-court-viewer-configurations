@@ -7,6 +7,30 @@ metadata:
     tags: nginx
   name: ${NAME}
 objects:
+  - kind: NetworkPolicy
+    apiVersion: networking.k8s.io/v1
+    metadata:
+      name: ${NAME}-allow-ingress
+      labels:
+        name: ${NAME}-allow-ingress
+        app: ${APP_NAME}
+        env: ${TAG_NAME}
+    spec:
+      description: |
+        Allow traffic from routes into the ${ROLE} container(s).
+      ingress:
+        - from:
+            - namespaceSelector:
+                matchLabels:
+                  network.openshift.io/policy-group: ingress
+      podSelector:
+        matchLabels:
+          role: ${ROLE}
+          app: ${APP_NAME}
+          env: ${TAG_NAME}
+      policyTypes:
+        - Ingress
+
   - kind: DeploymentConfig
     apiVersion: v1
     metadata:
@@ -207,48 +231,6 @@ objects:
       minReplicas: ${{MIN_REPLICAS}}
       maxReplicas: ${{MAX_REPLICAS}}
 
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: custom-${NAME}${SUFFIX}-policy
-      labels:
-        name: custom-${NAME}${SUFFIX}-policy
-        app: ${APP_NAME}
-        app-group: ${APP_GROUP}
-        role: ${ROLE}
-        env: ${TAG_NAME}
-    spec:
-      description: Allow the web application to talk to the api.
-      source:
-        - - role=${ROLE}
-          - app=${APP_NAME}${SUFFIX}
-          - env=${TAG_NAME}
-          - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
-      destination:
-        - - role=api
-          - app=${APP_NAME}${SUFFIX}
-          - env=${TAG_NAME}
-          - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
-
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: custom-${APP_GROUP}-pods-to-api
-      labels:
-        name: custom-${APP_GROUP}-pods-to-api
-        app: ${APP_NAME}
-        app-group: ${APP_GROUP}
-        role: ${ROLE}
-        env: ${TAG_NAME}
-    spec:
-      description: |
-        Allow pods to talk to the internal api so deployments work.
-        This only needs to be specified once per environment.
-      source:
-        - - $namespace=${NAMESPACE_NAME}-${TAG_NAME}
-      destination:
-        - - int:network=internal-cluster-api-endpoint
-
   - kind: Secret
     apiVersion: v1
     metadata:
@@ -290,7 +272,7 @@ parameters:
     displayName: Namespace Name
     description: The base namespace name for the project.
     required: true
-    value: ovjbim
+    value: 90a666
   - name: ROLE
     displayName: Role
     description:
@@ -302,7 +284,7 @@ parameters:
     displayName: Image Namespace
     name: IMAGE_NAMESPACE
     required: true
-    value: ovjbim-tools
+    value: 90a666-tools
   - description:
       OpenShift cluster private IP range in CIDR notation, used by Nginx
       ngx_http_realip_module.
@@ -375,11 +357,11 @@ parameters:
     value: /tmp/
 
   - description:
-      The exposed hostname that will route to the service, e.g., myappname.pathfinder.gov.bc.ca,
+      The exposed hostname that will route to the service, e.g., myappname.apps.silver.devops.gov.bc.ca,
       if left blank a value will be defaulted.
     displayName: Application Hostname
     name: APPLICATION_DOMAIN
-    value: supreme-court-viewer-dev.pathfinder.gov.bc.ca
+    value: supreme-court-viewer-dev.apps.silver.devops.gov.bc.ca
 
   - name: ALLOW_LIST
     displayName: Allow List
@@ -414,12 +396,12 @@ parameters:
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
     required: true
-    value: "1"
+    value: "3"
   - name: MAX_REPLICAS
     displayName: Maximum Replicas
     description: The maximum number of pods to have running.
     required: true
-    value: "4"
+    value: "6"
   - name: CPU_REQUEST
     displayName: Resources CPU Request
     description: The resources CPU request (in cores) for this build.

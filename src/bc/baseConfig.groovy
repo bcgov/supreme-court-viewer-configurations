@@ -9,11 +9,11 @@ class baseConfig {
   public static final String[] DEPLOYMENT_ENVIRONMENT_TAGS = ['dev', 'test', 'prod']
 
   // The name of the project namespace(s).
-  public static final String  NAME_SPACE = 'ovjbim'
+  public static final String  NAME_SPACE = '90a666'
 
   // Instance Suffix
   public static final String  SUFFIX = ''
 
   // Apps - Listed in the order they should be deployed
-  public static final String[] APPS = [ 'db', 'api', 'web' ]
+  public static final String[] APPS = [ 'backup', 'db', 'api', 'web' ]
 }

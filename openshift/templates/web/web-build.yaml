@@ -29,7 +29,7 @@ objects:
         type: Dockerfile
         dockerfile: |-
           FROM ${SOURCE_IMAGE_NAME}:${SOURCE_IMAGE_TAG}
-          COPY * /tmp/app/dist/
+          COPY '*' /tmp/app/dist/
           CMD  /usr/libexec/s2i/run
         images:
           - from:
@@ -54,21 +54,6 @@ objects:
         limits:
           cpu: ${CPU_LIMIT}
           memory: ${MEMORY_LIMIT}
-  - kind: NetworkSecurityPolicy
-    apiVersion: secops.pathfinder.gov.bc.ca/v1alpha1
-    metadata:
-      name: pods-to-external-network
-      labels:
-        name: pods-to-external-network
-        env: ${ENV_NAME}
-    spec:
-      description: |
-        Allow the builds to access the internet.
-        This only needs to be specified once per environment.
-      source:
-        - - $namespace=${NAMESPACE_NAME}-${ENV_NAME}
-      destination:
-        - - ext:network=any
 parameters:
   - name: NAME
     displayName: Name
@@ -94,7 +79,7 @@ parameters:
     displayName: Namespace Name
     description: The base namespace name for the project.
     required: true
-    value: ovjbim
+    value: 90a666
   - name: ENV_NAME
     displayName: Environment Name
     description:
@@ -121,7 +106,7 @@ parameters:
     displayName: Runtime Image Namespace
     description: The namespace containing the runtime image.
     required: false
-    value: ovjbim-tools
+    value: 90a666-tools
   - name: RUNTIME_IMAGE_NAME
     displayName: Runtime Image Name
     description: The name of the runtime image.

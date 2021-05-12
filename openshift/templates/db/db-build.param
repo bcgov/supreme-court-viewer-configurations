@@ -4,7 +4,10 @@
 # Template File: ../openshift/templates/db/db-build.yaml
 #=========================================================
 NAME=db
+APP_NAME=Supreme-Court-Viewer
+APP_GROUP=app-image
 OUTPUT_IMAGE_TAG=latest
-SOURCE_IMAGE_KIND=DockerImage
-SOURCE_IMAGE_NAME=docker.io/centos/postgresql-12-centos8
-SOURCE_IMAGE_TAG=latest
+SOURCE_IMAGE_KIND=ImageStreamTag
+SOURCE_IMAGE_NAME=postgresql
+SOURCE_IMAGE_TAG=12
+SOURCE_IMAGE_NAMESPACE=openshift
