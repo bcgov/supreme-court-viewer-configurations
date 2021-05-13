@@ -30,6 +30,7 @@ if createOperation; then
   readParameter "REQUEST_APPLICATION_CODE - Please provide the Request Application Code for use with the File Services API.  The default is 'not-set'." REQUEST_APPLICATION_CODE "not-set" "false"
   readParameter "REQUEST_AGENCY_IDENTIFIER_ID - Please provide the Request Agency Identifier Id for use with the File Services API.  The default is a randomly gererated value." REQUEST_AGENCY_IDENTIFIER_ID $(generatePassword) "false"
   readParameter "REQUEST_PART_ID - Please provide the Request Part Id for use with the File Services API.  The default is a randomly gererated value." REQUEST_PART_ID $(generatePassword) "false"
+  readParameter "REQUEST_GET_USER_LOGIN_DEFAULT_AGENCY_ID - Please provide the Request Get User Login Default Agency Id for use with the File Services API.  The default is a randomly gererated value." REQUEST_GET_USER_LOGIN_DEFAULT_AGENCY_ID $(generatePassword) "false"
   readParameter "ALLOW_SITE_MINDER_USER_TYPE - Please provide the Allowed SiteMinder User Type for the application.  The default is a blank string." ALLOW_SITE_MINDER_USER_TYPE "" "false"
 
   # Get KeyCloak settings
