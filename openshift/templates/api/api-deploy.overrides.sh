@@ -56,6 +56,7 @@ else
   writeParameter "REQUEST_APPLICATION_CODE" "prompt_skipped" "false"
   writeParameter "REQUEST_AGENCY_IDENTIFIER_ID" "prompt_skipped" "false"
   writeParameter "REQUEST_PART_ID" "prompt_skipped" "false"
+  writeParameter "REQUEST_GET_USER_LOGIN_DEFAULT_AGENCY_ID" "prompt_skipped" "false"
   writeParameter "ALLOW_SITE_MINDER_USER_TYPE" "prompt_skipped" "false"
 
   writeParameter "KEYCLOAK_AUTHORITY" "prompt_skipped" "false"

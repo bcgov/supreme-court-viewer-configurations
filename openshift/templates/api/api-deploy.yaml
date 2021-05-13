@@ -56,6 +56,7 @@ objects:
       request-application-code: ${REQUEST_APPLICATION_CODE}
       request-agency-identifier-id: ${REQUEST_AGENCY_IDENTIFIER_ID}
       request-part-id: ${REQUEST_PART_ID}
+      request-get-user-login-default-agency-id: ${REQUEST_GET_USER_LOGIN_DEFAULT_AGENCY_ID}
       siteminder-user-type: ${ALLOW_SITE_MINDER_USER_TYPE}
       data-protection-encryption-key: ${DATA_PROTECTION_ENCRYPTION_KEY}
       keycloak-client: ${KEYCLOAK_CLIENT}
@@ -212,6 +213,11 @@ objects:
                     secretKeyRef:
                       name: ${NAME}${SUFFIX}
                       key: request-part-id
+                - name: Request__GetUserLoginDefaultAgencyId
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: request-get-user-login-default-agency-id
                 - name: Auth__UserId
                   valueFrom:
                     secretKeyRef:
