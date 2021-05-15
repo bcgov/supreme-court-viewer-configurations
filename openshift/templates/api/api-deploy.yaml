@@ -324,6 +324,7 @@ objects:
         name: ${NAME}${SUFFIX}
       minReplicas: ${{MIN_REPLICAS}}
       maxReplicas: ${{MAX_REPLICAS}}
+      sessionAffinity: ClientIP
 
 parameters:
   - name: NAME
