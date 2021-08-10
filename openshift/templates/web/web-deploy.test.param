@@ -23,7 +23,7 @@
 # NGINX_CONF_TEMPLATE_FILE_NAME=nginx.conf.template
 # NGINX_CONF_TEMPLATE_CONFIG_MAP_NAME=nginx-conf-template
 # NGINX_CONF_TEMPLATE_MOUNT_PATH=/tmp/
-APPLICATION_DOMAIN=supreme-court-viewer-test.apps.silver.devops.gov.bc.ca
+APPLICATION_DOMAIN=justice-cv-test.silver.devops.bcgov
 # ALLOW_LIST=
 # ROUTE_TIMEOUT=60s
 # INCLUDE_SITEMINDER_HEADERS=false
