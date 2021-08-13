@@ -103,7 +103,7 @@ parameters:
     displayName: Source Image Tag
     description: The tag of the source image.
     required: true
-    value: "10"
+    value: "14"
   - name: CPU_LIMIT
     displayName: Resources CPU Limit
     description: The resources CPU limit (in cores) for this build.
