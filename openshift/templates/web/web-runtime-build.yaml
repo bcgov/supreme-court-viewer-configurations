@@ -91,7 +91,7 @@ parameters:
     displayName: Source Image Name
     description: The name of the source image.
     required: true
-    value: docker-remote.artifacts.developer.gov.bc.ca/nginx
+    value: artifacts.developer.gov.bc.ca/docker-remote/nginx
   - name: SOURCE_IMAGE_TAG
     displayName: Source Image Tag
     description: The tag of the source image.
