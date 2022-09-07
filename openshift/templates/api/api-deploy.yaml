@@ -66,6 +66,8 @@ objects:
       keycloak-pres-req-conf-id: ${KEYCLOAK_PRES_REQ_CONF_ID}
       keycloak-idp-hint: ${KEYCLOAK_IDP_HINT}
       siteminder-logout-url: ${SITEMINDER_LOGOUT_URL}
+      splunk-collector-url: ${SPLUNK_COLLECTOR_URL}
+      splunk-token: ${SPLUNK_TOKEN}
     type: Opaque
   - kind: Service
     apiVersion: v1
@@ -301,6 +303,16 @@ objects:
                       key: file-services-client-url
                 - name: WebBaseHref
                   value: ${WEB_BASE_HREF}
+                - name: SplunkCollectorUrl
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: splunk-collector-url
+                - name: SplunkToken
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: splunk-token
               resources:
                 requests:
                   cpu: ${CPU_REQUEST}
@@ -512,6 +524,16 @@ parameters:
   - name: SITEMINDER_LOGOUT_URL
     displayName: SiteMinder Logout URL
     description: SiteMinder Logout URL
+    required: false
+    value: ""
+  - name: SPLUNK_COLLECTOR_URL
+    displayName: Splunk collector URL
+    description: Splunk collector URL
+    required: false
+    value: ""
+  - name: SPLUNK_TOKEN
+    displayName: Splunk token
+    description: Splunk token
     required: false
     value: ""
 
