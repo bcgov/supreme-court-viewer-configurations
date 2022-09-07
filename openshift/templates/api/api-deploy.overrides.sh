@@ -39,6 +39,10 @@ if createOperation; then
   readParameter "KEYCLOAK_PRES_REQ_CONF_ID - Please provide the KeyCloak Presentation request Configuration Id." KEYCLOAK_PRES_REQ_CONF_ID "" "false"
   readParameter "KEYCLOAK_IDP_HINT - Please provide the KeyCloak hint for login." KEYCLOAK_IDP_HINT "" "false"
   readParameter "SITEMINDER_LOGOUT_URL - Please provide the SiteMinder Logout URL." SITEMINDER_LOGOUT_URL "" "false" 
+
+  # Get Splunk settings
+  readParameter "SPLUNK_COLLECTOR_URL - Please provide the Splunk collector URL." SPLUNK_COLLECTOR_URL "" "false"
+  readParameter "SPLUNK_TOKEN - Please provide the Splunk token." SPLUNK_TOKEN "" "false"
 else
   printStatusMsg "Update operation detected ...\nSkipping the generation of keys ...\n"
   writeParameter "DATA_PROTECTION_ENCRYPTION_KEY" "generation_skipped" "false"
@@ -65,6 +69,9 @@ else
   writeParameter "KEYCLOAK_PRES_REQ_CONF_ID" "prompt_skipped" "false"
   writeParameter "KEYCLOAK_IDP_HINT" "prompt_skipped" "false"
   writeParameter "SITEMINDER_LOGOUT_URL" "prompt_skipped" "false"
+
+  writeParameter "SPLUNK_COLLECTOR_URL" "prompt_skipped" "false"
+  writeParameter "SPLUNK_TOKEN" "prompt_skipped" "false"
 fi
 
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"
