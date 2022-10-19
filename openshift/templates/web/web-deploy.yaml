@@ -113,6 +113,16 @@ objects:
                     secretKeyRef:
                       name: ${API_SERVICE_NAME}
                       key: api-password
+                - name: SplunkCollectorUrl
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: splunk-collector-url
+                - name: SplunkToken
+                  valueFrom:
+                    secretKeyRef:
+                      name: ${NAME}${SUFFIX}
+                      key: splunk-token
                 - name: IncludeSiteminderHeaders
                   value: ${INCLUDE_SITEMINDER_HEADERS}
               resources:
@@ -243,6 +253,8 @@ objects:
         env: ${TAG_NAME}
     stringData:
       allow-list: ${ALLOW_LIST}
+      splunk-collector-url: ${SPLUNK_COLLECTOR_URL}
+      splunk-token: ${SPLUNK_TOKEN}
     type: Opaque
 
 parameters:
@@ -392,6 +404,16 @@ parameters:
     displayName: HTTP Basic Nginx Config Line
     name: HTTP_BASIC
     value:
+  - name: SPLUNK_COLLECTOR_URL
+    displayName: Splunk collector URL
+    description: Splunk collector URL
+    required: false
+    value: ""
+  - name: SPLUNK_TOKEN
+    displayName: Splunk token
+    description: Splunk token
+    required: false
+    value: ""    
   - name: MIN_REPLICAS
     displayName: Minimum Replicas
     description: The minimum number of pods to have running.
