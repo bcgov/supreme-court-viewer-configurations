@@ -32,10 +32,15 @@ generateConfigMap "${CONFIG_MAP_NAME}" "${SOURCE_FILE}" "${OUTPUT_FORMAT}" "${OU
 
 if createOperation; then
   readParameter "ALLOW_LIST - Please enter the list of trusted IP addresses that should be allowed to access the application's route (as a space delimited list of IP addresses):" "ALLOW_LIST" "" "false"
+  # Get Splunk settings
+  readParameter "SPLUNK_COLLECTOR_URL - Please provide the Splunk collector URL." SPLUNK_COLLECTOR_URL "" "false"
+  readParameter "SPLUNK_TOKEN - Please provide the Splunk token." SPLUNK_TOKEN "" "false"
 else
   # Get ALLOW_LIST from secret
   printStatusMsg "Getting allow list from secret ...\n"
   writeParameter "ALLOW_LIST" "$(getSecret "${NAME}${SUFFIX}" "allow-list")" "false"
+  writeParameter "SPLUNK_COLLECTOR_URL" "prompt_skipped" "false"
+  writeParameter "SPLUNK_TOKEN" "prompt_skipped" "false"
 fi
 
 SPECIALDEPLOYPARMS="--param-file=${_overrideParamFile}"

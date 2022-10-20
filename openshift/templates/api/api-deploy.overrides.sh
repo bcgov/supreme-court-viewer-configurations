@@ -49,7 +49,7 @@ else
 
   # Secrets are removed from the configurations during update operations ...
   writeParameter "REQUEST_PART_ID" "prompt_skipped" "false"
-  printStatusMsg "Update operation detected ...\nSkipping the generation of random user credentials.\nSkipping the prompts for FILE_SERVICES_CLIENT_URL, FILE_SERVICES_CLIENT_USERNAME, FILE_SERVICES_CLIENT_PASSWORD, REQUEST_APPLICATION_CODE, REQUEST_AGENCY_IDENTIFIER_ID, ALLOW_SITE_MINDER_USER_TYPE, KEYCLOAK_AUTHORITY, KEYCLOAK_SECRET, KEYCLOAK_PRES_REQ_CONF_ID, KEYCLOAK_IDP_HINT, and SITEMINDER_LOGOUT_URL secrets ...\n"
+  printStatusMsg "Update operation detected ...\nSkipping the generation of random user credentials.\nSkipping the prompts for FILE_SERVICES_CLIENT_URL, FILE_SERVICES_CLIENT_USERNAME, FILE_SERVICES_CLIENT_PASSWORD, REQUEST_APPLICATION_CODE, REQUEST_AGENCY_IDENTIFIER_ID, ALLOW_SITE_MINDER_USER_TYPE, KEYCLOAK_AUTHORITY, KEYCLOAK_SECRET, KEYCLOAK_PRES_REQ_CONF_ID, KEYCLOAK_IDP_HINT, SITEMINDER_LOGOUT_URL, SPLUNK_COLLECTOR_URL and SPLUNK_TOKEN secrets ...\n"
   writeParameter "USER_ID" "generation_skipped" "false"
   writeParameter "USER_PASSWORD" "generation_skipped" "false"
   writeParameter "ADMIN_USER_ID" "generation_skipped" "false"
