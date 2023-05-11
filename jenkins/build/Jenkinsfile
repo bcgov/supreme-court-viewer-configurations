@@ -11,7 +11,14 @@ library identifier: "${LIB_NAME}@${LIB_BRANCH}",
 
 node {
 
-  def config = load "../workspace@script/2997395fec659f26f4b3b2a595859b3985578c039148f9c67f66b50d93985cfb/jenkins/${PIPELINE_NAME}/config.groovy"
+  stage("Init") {
+    script {
+      dir(''){
+        checkout scm
+        config = load "jenkins/${PIPELINE_NAME}/config.groovy"
+      }
+    }
+  }
 
   config.BUILDS.each {
     stage("Build ${it}") {
